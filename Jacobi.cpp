@@ -55,7 +55,7 @@ void readMatrix( Matrix & matrix, std::ifstream & like_pipe )
 	like_pipe >> c;
 	assert(c < std::numeric_limits<Element_type>::max() );
 	assert(c > 0);
-	std::size_t x = std::numeric_limits<std::size_t>::max();
+	Element_type x = std::numeric_limits<Element_type>::max();
 	matrix.initialize(r,c);
 //	Element_type y = sizeof(matrix)/sizeof(matrix.getElement(0,0));//under construction
 	//r = y * matrix.getCol();
@@ -71,7 +71,7 @@ void readMatrix( Matrix & matrix, std::ifstream & like_pipe )
 			assert( x < std::numeric_limits<Element_type>::max());
 			matrix.setElement(i,j,x);
 		}//end for(j;j;j)
-			std::cout << std::endl;
+		//	std::cout << std::endl;//test
 	}//end for(i;i;i)
 }
 
@@ -109,7 +109,7 @@ void jacobiMethod(const  Matrix & a, const  Matrix &b, Matrix &x)
 		x.setElement(i,single_col,0);
 	}//end for(i;i;i)
 	std::size_t count = 0;
-	while( count < 20)
+	while( count < 50)
 	{
 	for( std::size_t i= 0; i< a.getRow(); ++i) //finding solution 
 	{
@@ -149,6 +149,6 @@ int main()
 	readMatrix(b,B);
 	x.initialize(a.getRow() , b.getCol());
 	jacobiMethod( a, b, x);
-	writeMatrix(b, X);
+	writeMatrix(x, X);
 	return 0;
 }
